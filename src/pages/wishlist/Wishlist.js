@@ -1,11 +1,10 @@
 import React from 'react'
 
-export const Home = () => {
+export const Wishlist = () => {
   return (
     <div>
-     <h1>Home</h1> 
+      <h1>Wishlist</h1>
     </div>
   )
 }
-
 
