@@ -38,5 +38,7 @@ a:-webkit-any-link {
     font-size: large;
   }
   
-  
+.nav_elements:hover{
+  text-decoration: underline;
+}
   

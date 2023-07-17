@@ -1,13 +1,13 @@
-import "./Header.css";
 import React from 'react'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+import "./Header.css";
 
 export const Header = () => {
   return (
     <div className="navbar">
-      
        <div className="header_home">
-        <Link to="/">ShoppersKart</Link>
+        <NavLink to="/">ShoppersKart</NavLink>
         </div> 
         <div className="header_search">
           <input
@@ -15,9 +15,9 @@ export const Header = () => {
           />
         </div>
         <div className="header_elements">
-         <Link to="/product">Products</Link>
-         <Link to="/wishlist">Wishlist</Link>
-         <Link to="/cart">Cart</Link> 
+         <NavLink className="nav_elements" to="/product">Products</NavLink>
+         <NavLink className="nav_elements" to="/wishlist">Wishlist</NavLink>
+         <NavLink className="nav_elements" to="/cart">Cart</NavLink> 
         </div>
         
     </div>

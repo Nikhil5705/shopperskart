@@ -1,17 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import "./productListing.css";
+import "./Style.css";
 import { CartContext } from '../../context/CartContext';
-import { WishlistContext } from '../../context/WishlistContext';
 
-export const ProductListing = ({products}) => {
+export const Womenswear = ({products}) => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
+  const filteredProd = products.filter(product => product.categoryName === "women");
   const {cartHandler} = useContext(CartContext);
-  const {wishlistHandler} = useContext(WishlistContext);
   const navigate = useNavigate();
-
 
   const handlePriceFilter = (event) =>{
     setPriceFilter(event.target.value);
@@ -26,18 +24,19 @@ export const ProductListing = ({products}) => {
     setRatingFilter(event.target.value);
   };
 
-  const filteredProducts = products.sort((a, b) => {
-        if (priceFilter === 'lowToHigh') {
-          return a.price - b.price;
-        } else if (priceFilter === 'highToLow') {
-          return b.price - a.price;
-        }
-        return a._id - b._id;
-      })
-      .filter(({rating}) => rating >= ratingFilter);
+  const filteredProducts = filteredProd.sort((a, b) => {
+    if (priceFilter === 'lowToHigh') {
+      return a.price - b.price;
+    } else if (priceFilter === 'highToLow') {
+      return b.price - a.price;
+    }
+    return a._id - b._id;
+  })
+  .filter(({rating}) => rating >= ratingFilter);
+
   return (
     <div>
-      <h1 className='heading'>All Products</h1>
+      <h1 className='heading'>Women's Wear</h1> 
       <div> 
       <h2>Filter by Price:</h2>
       <label>
@@ -54,24 +53,21 @@ export const ProductListing = ({products}) => {
     <div>
       <button onClick={handleClearAllFilters}>Clear All Filters</button>
     </div>
-    <div>
+
     {filteredProducts.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
       return (
-       <div key={_id} className='product_card' 
-       >
-        <img onClick={() => {navigate(`/singleproduct/${_id}`);}} className='prod_image' src={image} alt={title}/>
+       <div key={_id} className='product_card'>
+        <img onClick={() => {navigate(`/singleproduct/${_id}`);}} className='prod_image' src={image}/>
         <h1 className='prod_heading'>{title}</h1>
         <div className='prod_price'>${price}</div>
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
         <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>
-        <button className='add_to_wishlist' onClick={() =>{wishlistHandler(item)}}>Add To Wishlist</button>
+        <button className='add_to_wishlist'>Add To Wishlist</button>
        </div>
       )}) 
       } 
     </div>
-    </div>
   )
 }
-
