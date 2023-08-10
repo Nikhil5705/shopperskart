@@ -7,6 +7,7 @@ import App from "./App";
 import { makeServer } from "./server";
 import { CartContext, CartProvider } from "./context/CartContext";
 import { WishlistContext, WishlistProvider } from "./context/WishlistContext";
+import { DataProvider } from "./context/DataContext";
 
 export {CartContext}
 export {WishlistContext}
@@ -16,11 +17,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <DataProvider>
       <WishlistProvider>
         <CartProvider>
           <App />  
         </CartProvider>
       </WishlistProvider>
+      </DataProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

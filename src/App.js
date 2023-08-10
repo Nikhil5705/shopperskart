@@ -20,11 +20,11 @@ function App() {
         <Header />
        <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product" element={<ProductListing products={products} />} />
+        <Route path="/product" element={<ProductListing />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/singleproduct/:productId" element={<SingleProduct />} />
-        <Route path="/shoes" element={<Shoes products={products} />} />
+        <Route path="/shoes" element={<Shoes />} />
         <Route path="/menswear" element={<Menswear products={products} />} />
         <Route path="/womenswear" element={<Womenswear products={products} />} />
        </Routes>

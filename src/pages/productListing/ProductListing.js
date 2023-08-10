@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import "./productListing.css";
 import { CartContext } from '../../context/CartContext';
 import { WishlistContext } from '../../context/WishlistContext';
+import { useData } from '../../context/DataContext';
+
 
 export const ProductListing = ({products}) => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
-  const {cartHandler} = useContext(CartContext);
-  const {wishlistHandler} = useContext(WishlistContext);
-  const navigate = useNavigate();
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const {cartItem, cartHandler} = useContext(CartContext);
 
+  const {wishlistHandler} = useContext(WishlistContext);
+  const {backendData} = useData()
+  const navigate = useNavigate();
 
   const handlePriceFilter = (event) =>{
     setPriceFilter(event.target.value);
@@ -20,13 +24,18 @@ export const ProductListing = ({products}) => {
   const handleClearAllFilters = () =>{
     setPriceFilter("");
     setRatingFilter(0);
+    setCategoryFilter("")
   };
 
   const handleRatingFilter = (event) =>{
     setRatingFilter(event.target.value);
   };
 
-  const filteredProducts = products.sort((a, b) => {
+  const handleCategoryFilter = (category) =>{
+            setCategoryFilter(category)
+          };
+
+  const filteredProducts = backendData?.products?.sort((a, b) => {
         if (priceFilter === 'lowToHigh') {
           return a.price - b.price;
         } else if (priceFilter === 'highToLow') {
@@ -34,7 +43,8 @@ export const ProductListing = ({products}) => {
         }
         return a._id - b._id;
       })
-      .filter(({rating}) => rating >= ratingFilter);
+      .filter(({rating}) => rating >= ratingFilter)
+      .filter(({ categoryName }) => categoryFilter === "" || categoryName === categoryFilter);
   return (
     <div>
       <h1 className='heading'>All Products</h1>
@@ -52,11 +62,26 @@ export const ProductListing = ({products}) => {
       </label>
     </div>
     <div>
+   <input type="checkbox" checked={categoryFilter === "men"} onChange={() => handleCategoryFilter("men")} />
+   <label>Men's wear</label>
+   </div>
+ <div>
+   <input type="checkbox" checked={categoryFilter === "women"} onChange={() => handleCategoryFilter("women")} />
+   <label>Women's Wear</label>
+ </div>
+ <div>
+   <input type="checkbox" checked={categoryFilter === "shoe"} onChange={() => handleCategoryFilter("shoe")} />
+   <label>Shoe</label>
+ </div>
+    <div>
       <button onClick={handleClearAllFilters}>Clear All Filters</button>
     </div>
+
     <div>
-    {filteredProducts.map((item) =>{
+    {filteredProducts?.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
+      const isItInCart = cartItem.find(prod => prod._id === _id)
+      
       return (
        <div key={_id} className='product_card' 
        >
@@ -65,7 +90,7 @@ export const ProductListing = ({products}) => {
         <div className='prod_price'>${price}</div>
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
-        <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>
+        {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>}
         <button className='add_to_wishlist' onClick={() =>{wishlistHandler(item)}}>Add To Wishlist</button>
        </div>
       )}) 
