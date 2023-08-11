@@ -5,13 +5,15 @@ import "./productListing.css";
 import { CartContext } from '../../context/CartContext';
 import { WishlistContext } from '../../context/WishlistContext';
 import { useData } from '../../context/DataContext';
+import { FilterContext } from '../../context/FilterContext';
 
 
 export const ProductListing = ({products}) => {
-  const [priceFilter, setPriceFilter] = useState("");
-  const [ratingFilter, setRatingFilter] = useState(0);
-  const [categoryFilter, setCategoryFilter] = useState("");
+  // const [priceFilter, setPriceFilter] = useState("");
+  // const [ratingFilter, setRatingFilter] = useState(0);
+  // const [categoryFilter, setCategoryFilter] = useState("");
   const {cartItem, cartHandler} = useContext(CartContext);
+  const {priceFilter, setPriceFilter, ratingFilter, setRatingFilter, categoryFilter, setCategoryFilter} = useContext(FilterContext);
 
   const {wishlistHandler} = useContext(WishlistContext);
   const {backendData} = useData()
