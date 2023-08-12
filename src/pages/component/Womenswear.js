@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 import "./Style.css";
 import { CartContext } from '../../context/CartContext';
+import { useData } from '../../context/DataContext';
 
 export const Womenswear = ({products}) => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
-  const filteredProd = products.filter(product => product.categoryName === "women");
+
   const {cartHandler} = useContext(CartContext);
+  const {backendData} = useData();
+
   const navigate = useNavigate();
+
+  const filteredProd = backendData?.products?.filter(product => product.categoryName === "women");
 
   const handlePriceFilter = (event) =>{
     setPriceFilter(event.target.value);
@@ -24,7 +29,7 @@ export const Womenswear = ({products}) => {
     setRatingFilter(event.target.value);
   };
 
-  const filteredProducts = filteredProd.sort((a, b) => {
+  const filteredProducts = filteredProd?.sort((a, b) => {
     if (priceFilter === 'lowToHigh') {
       return a.price - b.price;
     } else if (priceFilter === 'highToLow') {
@@ -54,7 +59,7 @@ export const Womenswear = ({products}) => {
       <button onClick={handleClearAllFilters}>Clear All Filters</button>
     </div>
 
-    {filteredProducts.map((item) =>{
+    {filteredProducts?.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
       return (
        <div key={_id} className='product_card'>

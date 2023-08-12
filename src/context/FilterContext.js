@@ -8,6 +8,7 @@ export const FilterProvider = ({children}) => {
     const [priceFilter, setPriceFilter] = useState("");
     const [ratingFilter, setRatingFilter] = useState(0);
     const [categoryFilter, setCategoryFilter] = useState("");
+    // const [searchFilter, setSearchFilter] = useState("");
 
   return (
     <div>

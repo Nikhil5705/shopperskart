@@ -5,13 +5,12 @@ import "./Header.css";
 import { AuthContext } from '../../context/AuthContext';
 
 export const Header = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { token, handleLogout } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
-    navigate(location?.state?.from?.pathname);
+    navigate("/login");
   };
 
   return (
@@ -28,7 +27,7 @@ export const Header = () => {
          <NavLink className="nav_elements" to="/product">Products</NavLink>
          <NavLink className="nav_elements" to="/wishlist">Wishlist</NavLink>
          <NavLink className="nav_elements" to="/cart">Cart</NavLink> 
-         <button className="nav_elements" onClick={handleLogin}>{isLoggedIn ? "Logout" : "Login"}</button>
+         <button className="nav_elements" onClick={token ? handleLogout :handleLogin}>{token ? "Logout" : "Login"}</button>
 
         </div>
         

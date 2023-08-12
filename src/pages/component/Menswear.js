@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 import "./Style.css";
 import { CartContext } from '../../context/CartContext';
+import { useData } from '../../context/DataContext';
 
 export const Menswear = ({products}) => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
-    const filteredProd = products.filter(product => product.categoryName === "men");
-    const {cartHandler} = useContext(CartContext);
-    
-    const navigate = useNavigate();
+
+  const {cartHandler} = useContext(CartContext);
+  const {backendData} = useData();
+
+  const navigate = useNavigate();
+
+    const filteredProd = backendData?.products?.filter(product => product.categoryName === "men");
 
     const handlePriceFilter = (event) =>{
       setPriceFilter(event.target.value);
@@ -25,7 +29,7 @@ export const Menswear = ({products}) => {
       setRatingFilter(event.target.value);
     };
   
-    const filteredProducts = filteredProd.sort((a, b) => {
+    const filteredProducts = filteredProd?.sort((a, b) => {
       if (priceFilter === 'lowToHigh') {
         return a.price - b.price;
       } else if (priceFilter === 'highToLow') {

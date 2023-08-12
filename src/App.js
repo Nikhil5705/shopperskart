@@ -21,16 +21,15 @@ function App() {
       <header className="App-header">
         <Header />
        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />        
-        <Route path="/product" element={<ProductListing />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
-{/* </RequireAuth> */}
-        <Route path="/singleproduct/:productId" element={<SingleProduct />} />
-        <Route path="/shoes" element={<Shoes />} />
-        <Route path="/menswear" element={<Menswear products={products} />} />
-        <Route path="/womenswear" element={<Womenswear products={products} />} />
+         <Route path="/" element={<Home />} />
+         <Route path="/login" element={<Login />} />        
+         <Route path="/product" element={<ProductListing />} />
+         <Route path="/cart" element={<Cart />} />
+         <Route path="/wishlist" element={<RequireAuth><Wishlist /></RequireAuth>} />
+         <Route path="/singleproduct/:productId" element={<SingleProduct />} />
+         <Route path="/shoes" element={<Shoes />} />
+         <Route path="/menswear" element={<Menswear />} />
+         <Route path="/womenswear" element={<Womenswear />} />
        </Routes>
       </header>
       <Footer />

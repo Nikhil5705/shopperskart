@@ -8,7 +8,7 @@ import { useData } from '../../context/DataContext';
 import { FilterContext } from '../../context/FilterContext';
 
 
-export const ProductListing = ({products}) => {
+export const ProductListing = () => {
   // const [priceFilter, setPriceFilter] = useState("");
   // const [ratingFilter, setRatingFilter] = useState(0);
   // const [categoryFilter, setCategoryFilter] = useState("");
@@ -47,6 +47,7 @@ export const ProductListing = ({products}) => {
       })
       .filter(({rating}) => rating >= ratingFilter)
       .filter(({ categoryName }) => categoryFilter === "" || categoryName === categoryFilter);
+
   return (
     <div>
       <h1 className='heading'>All Products</h1>
