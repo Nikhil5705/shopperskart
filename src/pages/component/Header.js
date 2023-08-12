@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./Header.css";
 import { AuthContext } from '../../context/AuthContext';
 
 export const Header = () => {
   const { token, handleLogout } = useContext(AuthContext);
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
@@ -27,6 +27,7 @@ export const Header = () => {
          <NavLink className="nav_elements" to="/product">Products</NavLink>
          <NavLink className="nav_elements" to="/wishlist">Wishlist</NavLink>
          <NavLink className="nav_elements" to="/cart">Cart</NavLink> 
+         <NavLink className="nav_elements" to="/profile">Profile</NavLink> 
          <button className="nav_elements" onClick={token ? handleLogout :handleLogin}>{token ? "Logout" : "Login"}</button>
 
         </div>

@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 
 import "./Cart.css";
 import { CartContext } from '../../context/CartContext'
-
+import { useNavigate} from 'react-router';
 
 export const Cart = () => {
   const {cartItem, increaseQuantity, decreaseQuantity} = useContext(CartContext);
   const {removeFromCartHandler} = useContext(CartContext);
+  const navigate = useNavigate();
+  const totalBill = cartItem.reduce((total, prod)=> total+=Number(prod.price)*prod.quantity ,0)
   return (
     <div>{cartItem.length === 0 && <h2>Looks like you have not added anything in your cart. Why don't you buy something!!!</h2>}
       {cartItem.map((item) =>{
@@ -27,9 +29,11 @@ export const Cart = () => {
         </div>
       )}) 
       } 
-      <div> Total Price: {cartItem.reduce((total, prod)=> total+=Number(prod.price)*prod.quantity ,0)}
-      </div>
-      
+      <p>Total Quantity: {cartItem.length} Item</p>
+      <div>{totalBill != 0 ? `Total Price ${totalBill}`: ""}</div>
+
+{totalBill != 0 ? <button onClick={() => navigate("/checkout")}>Checkout</button> : <button className='add_to_cart' onClick={() =>navigate("/product")}>SHOP NOW</button>}
+     
     </div>
   )
 }

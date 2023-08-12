@@ -1,9 +1,7 @@
 import React, { useContext, useEffect} from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export const Login = () => {
   const { signIn, token } = useContext(AuthContext);
@@ -13,12 +11,11 @@ export const Login = () => {
   const handleSignIn = async (event) => {
     event.preventDefault();
 
-    // toast.success("Logged In Successful !!",{autoClose: false, position: "top-center"})
+    toast.success("Logged In Successful !!")
 
     const email = event.target[0].value;
     const password = event.target[1].value;
-     console.log(email)
-    console.log(password)
+
     try {
       await signIn(email, password);
     } catch (error) {
@@ -33,7 +30,7 @@ useEffect(()=>{if (token === true) {
   return (
     <div>
       <form onSubmit={handleSignIn}>
-        <h1>Sign In</h1>
+        <h1>Login</h1>
         <label>
           Email
           <input type="text" required></input>
@@ -43,8 +40,9 @@ useEffect(()=>{if (token === true) {
           <input type="password" required></input>
         </label>
         <button type="submit">Sign In</button>
+        <button type="submit">Login as a Guest</button>
       </form>
-      <ToastContainer />
+      <div>Don't have an account? <Link to="/signup">Sign Up</Link></div>
     </div>
   );
 };

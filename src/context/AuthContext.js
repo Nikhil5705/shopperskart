@@ -21,13 +21,25 @@ export  function AuthProvider ({ children }) {
       const res = await axios?.post("api/auth/login", { email, password });
       const { encodedToken, foundUser } = res.data;
       localStorage.setItem("token", encodedToken);
-      console.log(res.data)
-    
+      
       setUser(foundUser);
       setToken(encodedToken);
       if(location?.state?.from?.pathname)
       navigate(location?.state?.from?.pathname);
         else navigate("/", { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signUp = async (userData) => {
+    try {
+      const res = await axios.post("api/auth/signup", userData);
+      const { encodedToken, createdUser } = res.data;
+      localStorage.setItem("token", encodedToken);
+      localStorage.setItem("user", JSON.stringify(createdUser)); // Store user data as a string
+      setUser(createdUser);
+      setToken(encodedToken);
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +55,7 @@ export  function AuthProvider ({ children }) {
     <AuthContext.Provider
       value={{ signIn
         , token, setToken
-      , user, handleLogout }}>
+      , user, handleLogout, signUp }}>
       {children}
     </AuthContext.Provider>
   );
