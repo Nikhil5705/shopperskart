@@ -38,6 +38,15 @@ a:-webkit-any-link {
     font-size: large;
   }
   
+  .nav_elements{
+    margin-left: 10px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: large;
+    border: none;
+  }
+
 .nav_elements:hover{
   text-decoration: underline;
 }

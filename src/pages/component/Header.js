@@ -3,14 +3,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import "./Header.css";
 import { AuthContext } from '../../context/AuthContext';
+import { FilterContext } from '../../context/FilterContext';
 
 export const Header = () => {
   const { token, handleLogout } = useContext(AuthContext);
+  const {searchKeyword, setSearchKeyword} = useContext(FilterContext)
   // const location = useLocation();
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
     navigate("/login");
+  };
+
+  const handleSearch = (event) => {
+    setSearchKeyword(event.target.value);
   };
 
   return (
@@ -20,7 +26,10 @@ export const Header = () => {
         </div> 
         <div className="header_search">
           <input
-            placeholder="Search..."
+          type="text"
+          value={searchKeyword}
+          onChange={handleSearch}
+          placeholder="Search..."
           />
         </div>
         <div className="header_elements">

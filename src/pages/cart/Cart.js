@@ -29,7 +29,6 @@ export const Cart = () => {
         </div>
       )}) 
       } 
-      <p>Total Quantity: {cartItem.length} Item</p>
       <div>{totalBill != 0 ? `Total Price ${totalBill}`: ""}</div>
 
 {totalBill != 0 ? <button onClick={() => navigate("/checkout")}>Checkout</button> : <button className='add_to_cart' onClick={() =>navigate("/product")}>SHOP NOW</button>}

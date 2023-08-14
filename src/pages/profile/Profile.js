@@ -1,21 +1,23 @@
 import React from 'react'
 import { useContext } from "react"
+
+import "./Profile.css"
 import { AuthContext } from '../../context/AuthContext';
 
 export const Profile = () => {
 const { user } = useContext(AuthContext);
 
     return (
-      <div>
-        <h1>User Profile</h1>
+      <div className='user-profile-container'>
+        <h1 className='user-profile-heading'>User Profile</h1>
         {user? (
-          <div>
-            <p>Name: {user.firstName} {user.lastName}</p>
+          <div className='user-profile-detail-container'>
+            <p className='user-profile-detail'>Name: {user.firstName} {user.lastName}</p>
           
-            <p>Email: {user.email}</p>
+            <p className='user-profile-detail'>Email: {user.email}</p>
           </div>
         ) : (
-          <p>Loading user data...</p>
+          <p className='show-loading'>Loading user data...</p>
         )}
       </div>
     );

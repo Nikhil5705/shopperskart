@@ -1,7 +1,9 @@
 import React, { useContext, useEffect} from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import "./Login.css";
+
+import { AuthContext } from "../../context/AuthContext";
 
 export const Login = () => {
   const { signIn, token } = useContext(AuthContext);
@@ -28,21 +30,20 @@ useEffect(()=>{if (token === true) {
   }},[token])
 
   return (
-    <div>
-      <form onSubmit={handleSignIn}>
-        <h1>Login</h1>
-        <label>
+    <div  className="login-form-container">
+      <form  className="login-form" onSubmit={handleSignIn}>
+        <h1 className="login-heading">Login</h1>
+        <label className="login-label">
           Email
-          <input type="text" required></input>
+          <input className="login-input" type="text" required></input>
         </label>
-        <label>
+        <label className="login-label">
           Password
-          <input type="password" required></input>
+          <input className="login-input" type="password" required></input>
         </label>
-        <button type="submit">Sign In</button>
-        <button type="submit">Login as a Guest</button>
+        <button className="login-button" type="submit">Login</button>
       </form>
-      <div>Don't have an account? <Link to="/signup">Sign Up</Link></div>
+      <div>Don't have an account? <Link to="/signup" className="signup-link-text">Sign Up</Link></div>
     </div>
   );
 };

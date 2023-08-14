@@ -8,11 +8,10 @@ export const FilterProvider = ({children}) => {
     const [priceFilter, setPriceFilter] = useState("");
     const [ratingFilter, setRatingFilter] = useState(0);
     const [categoryFilter, setCategoryFilter] = useState("");
-    // const [searchFilter, setSearchFilter] = useState("");
-
+    const [searchKeyword, setSearchKeyword] = useState("");
   return (
     <div>
-      <FilterContext.Provider value={{priceFilter, setPriceFilter, ratingFilter, setRatingFilter, categoryFilter, setCategoryFilter}}>
+      <FilterContext.Provider value={{searchKeyword, setSearchKeyword, priceFilter, setPriceFilter, ratingFilter, setRatingFilter, categoryFilter, setCategoryFilter}}>
       {children}
       </FilterContext.Provider> 
           </div>
