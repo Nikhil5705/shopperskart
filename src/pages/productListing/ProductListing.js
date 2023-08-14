@@ -16,6 +16,7 @@ export const ProductListing = () => {
   const {priceFilter, setPriceFilter, ratingFilter, setRatingFilter, categoryFilter, setCategoryFilter} = useContext(FilterContext);
 
   const {wishlistHandler} = useContext(WishlistContext);
+  const {searchKeyword} = useContext(FilterContext)
   const {backendData} = useData()
   const navigate = useNavigate();
 
@@ -46,35 +47,42 @@ export const ProductListing = () => {
         return a._id - b._id;
       })
       .filter(({rating}) => rating >= ratingFilter)
-      .filter(({ categoryName }) => categoryFilter === "" || categoryName === categoryFilter);
+      .filter(({ categoryName }) => categoryFilter === "" || categoryName === categoryFilter)
+      .filter((product) => {
+        const title = product.title.toLowerCase();
+        return (
+          searchKeyword === "" || title.includes(searchKeyword.toLowerCase())
+        );
+      })
 
   return (
     <div>
       <h1 className='heading'>All Products</h1>
-      <div> 
-      <h2>Filter by Price:</h2>
-      <label>
+      <div className='filter_main'> 
+      <h2 className='filter_heading'>Filter by Price:</h2>
+      <label className='filter_by_price'>
       <input type='radio' value="highToLow" checked={priceFilter === "highToLow"} onChange={handlePriceFilter} />High to Low </label>
-      <label>
+      <label className='filter_by_price'>
       <input type='radio' value="lowToHigh" checked={priceFilter === "lowToHigh"} onChange={handlePriceFilter} />Low to High</label>
     </div>
     <div> 
-      <h2>Filter by Rating:</h2>
-      <label>
+      <h2 className='filter_heading'>Filter by Rating:</h2>
+      <label className='filter_by_rating'>
       <input type='range' min={0} max={5} step={1} value={ratingFilter} onChange={handleRatingFilter} />
       </label>
     </div>
     <div>
+    <h2 className='filter_heading'>Filter by Category:</h2>
    <input type="checkbox" checked={categoryFilter === "men"} onChange={() => handleCategoryFilter("men")} />
-   <label>Men's wear</label>
+   <label className='filter_by_category'>Men's wear</label>
    </div>
  <div>
    <input type="checkbox" checked={categoryFilter === "women"} onChange={() => handleCategoryFilter("women")} />
-   <label>Women's Wear</label>
+   <label className='filter_by_category'>Women's Wear</label>
  </div>
  <div>
    <input type="checkbox" checked={categoryFilter === "shoe"} onChange={() => handleCategoryFilter("shoe")} />
-   <label>Shoe</label>
+   <label className='filter_by_category'>Shoe</label>
  </div>
     <div>
       <button onClick={handleClearAllFilters}>Clear All Filters</button>
