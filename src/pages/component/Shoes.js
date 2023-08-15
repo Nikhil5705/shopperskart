@@ -9,7 +9,7 @@ export const Shoes = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
 
-    const {cartHandler} = useContext(CartContext);
+    const {cartItem, cartHandler} = useContext(CartContext);
     const {backendData} = useData()
     const navigate = useNavigate();
 
@@ -58,6 +58,7 @@ export const Shoes = () => {
     </div>
     {filteredProducts.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
+      const isItInCart = cartItem.find(prod => prod._id === _id)
       return (
        <div key={_id} className='product_card'>
         <img onClick={() => {navigate(`/singleproduct/${_id}`);}} className='prod_image' src={image}/>
@@ -65,7 +66,7 @@ export const Shoes = () => {
         <div className='prod_price'>${price}</div>
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
-        <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>
+        {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>}
         <button className='add_to_wishlist'>Add To Wishlist</button>
        </div>
       )}) 

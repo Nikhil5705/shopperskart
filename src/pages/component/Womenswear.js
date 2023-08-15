@@ -5,11 +5,11 @@ import "./Style.css";
 import { CartContext } from '../../context/CartContext';
 import { useData } from '../../context/DataContext';
 
-export const Womenswear = ({products}) => {
+export const Womenswear = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
 
-  const {cartHandler} = useContext(CartContext);
+  const {cartItem, cartHandler} = useContext(CartContext);
   const {backendData} = useData();
 
   const navigate = useNavigate();
@@ -61,6 +61,7 @@ export const Womenswear = ({products}) => {
 
     {filteredProducts?.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
+      const isItInCart = cartItem.find(prod => prod._id === _id)
       return (
        <div key={_id} className='product_card'>
         <img onClick={() => {navigate(`/singleproduct/${_id}`);}} className='prod_image' src={image}/>
@@ -68,7 +69,7 @@ export const Womenswear = ({products}) => {
         <div className='prod_price'>${price}</div>
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
-        <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>
+        {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>}
         <button className='add_to_wishlist'>Add To Wishlist</button>
        </div>
       )}) 
