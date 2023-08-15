@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import "./Style.css";
 import { CartContext } from '../../context/CartContext';
 import { useData } from '../../context/DataContext';
+import { WishlistContext } from '../../context/WishlistContext';
 
 export const Womenswear = () => {
   const [priceFilter, setPriceFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState(0);
 
   const {cartItem, cartHandler} = useContext(CartContext);
+  const {wishlistItem, wishlistHandler} = useContext(WishlistContext);
   const {backendData} = useData();
 
   const navigate = useNavigate();
@@ -62,6 +64,7 @@ export const Womenswear = () => {
     {filteredProducts?.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
       const isItInCart = cartItem.find(prod => prod._id === _id)
+      const isItInWishlist = wishlistItem.find(prod => prod._id === _id)
       return (
        <div key={_id} className='product_card'>
         <img onClick={() => {navigate(`/singleproduct/${_id}`);}} className='prod_image' src={image}/>
@@ -70,7 +73,7 @@ export const Womenswear = () => {
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
         {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>}
-        <button className='add_to_wishlist'>Add To Wishlist</button>
+        {isItInWishlist ? <button className='add_to_wishlist' onClick={() => {navigate(`/wishlist`);}}>Go To Wishlist</button> : <button className='add_to_wishlist' onClick={() =>{wishlistHandler(item)}}>Add To Wishlist</button>}
        </div>
       )}) 
       } 

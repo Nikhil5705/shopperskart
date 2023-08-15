@@ -15,7 +15,7 @@ export const ProductListing = () => {
   const {cartItem, cartHandler} = useContext(CartContext);
   const {priceFilter, setPriceFilter, ratingFilter, setRatingFilter, categoryFilter, setCategoryFilter} = useContext(FilterContext);
 
-  const {wishlistHandler} = useContext(WishlistContext);
+  const {wishlistItem, wishlistHandler} = useContext(WishlistContext);
   const {searchKeyword} = useContext(FilterContext)
   const {backendData} = useData()
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ export const ProductListing = () => {
     {filteredProducts?.map((item) =>{
       const {_id, title, price, rating, type, image} = item;
       const isItInCart = cartItem.find(prod => prod._id === _id)
-      
+      const isItInWishlist = wishlistItem.find(prod => prod._id === _id)
       return (
        <div key={_id} className='product_card' 
        >
@@ -102,7 +102,7 @@ export const ProductListing = () => {
         <div className='prod_type'>{type}</div>
         <div className='prod_rating'>rating: {rating}</div>
         {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(item)}}>Add To Cart</button>}
-        <button className='add_to_wishlist' onClick={() =>{wishlistHandler(item)}}>Add To Wishlist</button>
+        {isItInWishlist ? <button className='add_to_wishlist' onClick={() => {navigate(`/wishlist`);}}>Go To Wishlist</button> : <button className='add_to_wishlist' onClick={() =>{wishlistHandler(item)}}>Add To Wishlist</button>}
        </div>
       )}) 
       } 
