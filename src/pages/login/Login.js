@@ -25,6 +25,17 @@ export const Login = () => {
     }
   };
 
+  const handleGuestLogin = async () => {
+    const guestEmail = "adarshbalika@gmail.com";
+    const guestPassword = "adarshbalika";
+
+    try {
+      await signIn(guestEmail, guestPassword);
+    } catch (error) {
+      console.log("cant login as guest", error);
+    }
+  };
+
 useEffect(()=>{if (token === true) {
     navigate("/");
   }},[token])
@@ -41,6 +52,7 @@ useEffect(()=>{if (token === true) {
           Password
           <input className="login-input" type="password" required></input>
         </label>
+        <button className="login-button" onClick={handleGuestLogin}>Login as a Guest</button>
         <button className="login-button" type="submit">Login</button>
       </form>
       <div>Don't have an account? <Link to="/signup" className="signup-link-text">Sign Up</Link></div>
