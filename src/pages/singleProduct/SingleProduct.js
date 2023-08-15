@@ -11,7 +11,7 @@ export const SingleProduct = () => {
   // const {cartHandler} = useContext(CartContext)
   const {productId} = useParams();
   const {cartItem, cartHandler} = useContext(CartContext);
-  const {wishlistHandler} = useContext(WishlistContext);
+  const {wishlistItem, wishlistHandler} = useContext(WishlistContext);
 
   const navigate = useNavigate();
 
@@ -22,6 +22,7 @@ export const SingleProduct = () => {
 
   const { _id, title, price, description, image, rating, size, categoryName, type } = product;
   const isItInCart = cartItem.find(prod => prod._id === _id)
+  const isItInWishlist = wishlistItem.find(prod => prod._id === _id)
   return (
     <div className='prod_card'>
       <img className='prod_img' src={image} alt={title} />
@@ -35,7 +36,7 @@ export const SingleProduct = () => {
         <p className='prod_type'>Type: {type}</p>
         <div className='prod_actions'>
         {isItInCart ? <button className='add_to_cart' onClick={() => {navigate(`/cart`);}}>Go To Cart</button> : <button className='add_to_cart' onClick={() =>{cartHandler(product)}}>Add To Cart</button>}
-        <button className='add_to_wishlist' onClick={() =>{wishlistHandler(product)}}>Add To Wishlist</button>
+        {isItInWishlist ? <button className='add_to_wishlist' onClick={() => {navigate(`/wishlist`);}}>Go To Wishlist</button> : <button className='add_to_wishlist' onClick={() =>{wishlistHandler(product)}}>Add To Wishlist</button>}
         </div>
       </div>
     </div>
