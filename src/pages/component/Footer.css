@@ -16,3 +16,13 @@
 .footer_tag{
     margin-bottom: 15px;
 } 
+
+/* .footer_wrapper{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+
+body.scrolled .footer_wrapper {
+    bottom: 0;
+  } */
