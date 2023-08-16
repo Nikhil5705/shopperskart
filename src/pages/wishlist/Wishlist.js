@@ -10,7 +10,7 @@ const { wishlistItem, removeFromWishlistHandler } = useContext(WishlistContext);
 const {cartItem, cartHandler} = useContext(CartContext);
 const navigate = useNavigate();
 
-const removeHandler=(item)=>{
+const removeHandler = (item) => {
   removeFromWishlistHandler(item)
 }
   return (

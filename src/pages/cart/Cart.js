@@ -35,9 +35,9 @@ export const Cart = () => {
         </div>
       )}) 
       } 
-      <div>{totalBill != 0 ? `Total Price: $ ${totalBill}`: ""}</div>
+      <div>{totalBill !== 0 ? `Total Price: $ ${totalBill}`: ""}</div>
 
-{totalBill != 0 ? <button onClick={() => navigate("/checkout")}>Checkout</button> : <button className='add_to_cart' onClick={() =>navigate("/product")}>SHOP NOW</button>}
+{totalBill !== 0 ? <button onClick={() => navigate("/checkout")}>Checkout</button> : <button className='add_to_cart' onClick={() =>navigate("/product")}>SHOP NOW</button>}
      
     </div>
   )
