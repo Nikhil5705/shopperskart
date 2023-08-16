@@ -13,7 +13,7 @@ export const Cart = () => {
   const totalBill = cartItem.reduce((total, prod)=> total+=Number(prod.price)*prod.quantity ,0)
   return (
     <div>
-      <h2 style={{color: "olive"}}>Your Cart</h2>
+      <h2 className='cart_heading'>Your Cart</h2>
       {cartItem.length === 0 && <h2>Looks like you have not added anything in your cart. Why don't you buy something!!!</h2>}
       {cartItem.map((item) =>{
       const {_id, title, price, rating, type, image, quantity} = item;
@@ -35,7 +35,7 @@ export const Cart = () => {
         </div>
       )}) 
       } 
-      <div>{totalBill != 0 ? `Total Price ${totalBill}`: ""}</div>
+      <div>{totalBill != 0 ? `Total Price: $ ${totalBill}`: ""}</div>
 
 {totalBill != 0 ? <button onClick={() => navigate("/checkout")}>Checkout</button> : <button className='add_to_cart' onClick={() =>navigate("/product")}>SHOP NOW</button>}
      

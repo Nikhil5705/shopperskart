@@ -15,7 +15,7 @@ const removeHandler=(item)=>{
 }
   return (
     <div>
-      <h2 style={{color: "olive"}}>Your Wishlist</h2>
+      <h2 className='wishlist_heading'>Your Wishlist</h2>
       {wishlistItem.length === 0 && <h1>Look like you have not added anything in your wishlist. Why don't you buy something!!!</h1>}
       {wishlistItem.map((item) =>{
       const {_id, title, price, rating, type, image} = item;

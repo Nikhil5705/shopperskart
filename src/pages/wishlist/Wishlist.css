@@ -62,3 +62,7 @@
   .add_to_cart_from_wishlist:hover{
     background-color: rgb(99, 99, 50);
   }
+
+  .wishlist_heading{
+    color:olive
+  }
