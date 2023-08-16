@@ -1,62 +1,22 @@
-.checkout-container {
-  display: flex;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
-.address-section {
-  flex: 1;
-  padding: 0 20px;
-}
 
-.section-heading {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.address-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 15px;
+.place-order-btn {
+  padding: 0.6rem 1.25rem;
+  font-size: 1.3rem;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--white-color);
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  border-radius: 0.3rem;
 }
 
-.address-card:hover {
-  background-color: #f5f5f5;
+.place-order-btn:hover {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
-.address-details {
-  margin-left: 10px;
-}
-
-.address-name {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.order-summary {
-  flex: 1;
-  padding: 0 20px;
-}
-
-.item {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-.total {
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.checkout-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: olive;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}

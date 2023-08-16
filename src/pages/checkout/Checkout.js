@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
@@ -10,16 +11,19 @@ export const Checkout = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const handlePlaceOrder = () => {
-    // Perform the order placement logic here
-    // You can clear the cart and perform any other necessary actions
+    if (!selectedAddress) {
+      toast.error("Please select an address before placing the order");
+      return;
+    }
     clearCart();
-    navigate("/order_confirmation"); // Navigate to the order confirmation page
+    navigate("/order_confirmation"); 
+   
   };
 
   return (
     <div className="checkout-container">
-  <h2 className="checkout-heading">Checkout</h2>
   <div className="address-section">
+  <h2 className="checkout-heading">Checkout</h2>
     <h3 className="section-heading">Select Address</h3>
     <div className="address-option">
       <input
@@ -62,18 +66,19 @@ export const Checkout = () => {
     <h3 className="section-heading">Order Summary</h3>
     {cartItem.map((item) => (
       <div key={item._id} className="item">
-        {item.title} - Quantity: {item.quantity} - Price: {item.price}
+        {item.title} - Quantity: {item.quantity} - Price: ${item.price}
       </div>
     ))}
     <div className="total">
-      Total:{" "}
+      Total: $
       {cartItem.reduce(
         (totalPrice, item) => (totalPrice += item.price * item.quantity),
         0
       )}
     </div>
+    <button className="place-order-btn" onClick={handlePlaceOrder}>Place Order</button>
   </div>
-  <button className="checkout-btn" onClick={handlePlaceOrder}>Place Order</button>
+  
 </div>
   );
 }

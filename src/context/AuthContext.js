@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -50,6 +51,7 @@ export  function AuthProvider ({ children }) {
     setToken(null)
     localStorage.removeItem("token")
     navigate("/")
+    toast.success("Logout successful");
 }
   return (
     <AuthContext.Provider
