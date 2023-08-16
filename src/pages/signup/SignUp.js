@@ -31,7 +31,7 @@ export const SignUp = () => {
 
     try {
       await signUp(userData);
-      navigate("/userprofile");
+      navigate("/");
     } catch (error) {
       console.log("Can't sign up", error);
     }
