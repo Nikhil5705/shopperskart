@@ -8,7 +8,6 @@ import { FilterContext } from '../../context/FilterContext';
 export const Header = () => {
   const { token, handleLogout } = useContext(AuthContext);
   const {searchKeyword, setSearchKeyword} = useContext(FilterContext)
-  // const location = useLocation();
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
