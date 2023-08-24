@@ -8,8 +8,8 @@ export const AuthContext = createContext();
 export  function AuthProvider ({ children }) {
  
   
-  const [token, setToken] = useState(false);
-  const [user, setUser] = useState({});
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
  const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,7 +22,7 @@ export  function AuthProvider ({ children }) {
       const res = await axios?.post("api/auth/login", { email, password });
       const { encodedToken, foundUser } = res.data;
       localStorage.setItem("token", encodedToken);
-      
+      localStorage.setItem("user", JSON.stringify(foundUser));
       setUser(foundUser);
       setToken(encodedToken);
       if(location?.state?.from?.pathname)

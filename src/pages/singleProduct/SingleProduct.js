@@ -8,7 +8,7 @@ import { CartContext } from "../../context/CartContext";
 import { WishlistContext } from "../../context/WishlistContext";
 
 export const SingleProduct = () => {
-  // const {cartHandler} = useContext(CartContext)
+ 
   const {productId} = useParams();
   const {cartItem, cartHandler} = useContext(CartContext);
   const {wishlistItem, wishlistHandler} = useContext(WishlistContext);
